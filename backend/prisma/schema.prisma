@@ -12,3 +12,58 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model FirstHolder {
+  id                Int               @id @default(autoincrement())
+  name              String
+  dateOfBirth       DateTime
+  placeOfBirth      String
+  residentialStatus ResidentialStatus @default(RESIDENT_INDIAN)
+  motherName        String
+  panNumber         String
+  emailAddress      String
+  mobileNumber      String
+  postalAddress     String
+  grossAnnualIncome Float
+  occupation        String
+  panCardPath       String
+  adharCardPath     String
+  bankDetails       BankDetails?
+  Nominee           Nominee[]
+}
+
+model BankDetails {
+  id             Int          @id @default(autoincrement())
+  bankName       String
+  accountNumber  String
+  accountType    AccountType  @default(SAVINGS)
+  branchName     String
+  ifscCode       String
+  micrCode       String
+  chequeCopyPath String
+  firstHolder    FirstHolder? @relation(fields: [firstHolderId], references: [id])
+  firstHolderId  Int?         @unique
+}
+
+model Nominee {
+  id                Int         @id @default(autoincrement())
+  name              String
+  dateOfBirth       DateTime
+  panNumber         String
+  relationship      String
+  address           String
+  allocationPrecent Float       @default(100)
+  firstHolder       FirstHolder @relation(fields: [firstHolderId], references: [id])
+  firstHolderId     Int
+}
+
+enum ResidentialStatus {
+  RESIDENT_INDIAN
+  NRI
+}
+
+enum AccountType {
+  SAVINGS
+  CURRENT
+  FIXED
+}

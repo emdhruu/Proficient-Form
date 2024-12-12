@@ -9,6 +9,7 @@
   "author": "dhruti",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.0.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "joi": "^17.13.3",

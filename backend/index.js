@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import Router from "./routes/routes.js";
+import Router from "./src/routes/routes.js";
 import dotenv from "dotenv";
 
 const __dirname = import.meta.dirname;

@@ -9,9 +9,9 @@ import Complete from "./components/steps/Complete";
 const App = () => {
   const [currentSteps, setCurrentSteps] = useState(1);
   const steps = [
-    "FirstHolderDetails",
-    "BankDetails",
-    "NomineesDetails",
+    "Account Details",
+    "Bank Details",
+    "Nominees Details",
     "Complete",
   ];
 
@@ -28,6 +28,14 @@ const App = () => {
     }
   };
 
+  const handleClick = (direction) => {
+    let newStep = currentSteps;
+
+    direction == "next" ? newStep++ : newStep--;
+    newStep > 0 && newStep <= steps.length && setCurrentSteps(newStep);
+    // return;
+  };
+
   return (
     <div className="md:w-2/3 mx-auto shadow-lg rounded-2xl pb-2 bg-white">
       {/* Stepper */}
@@ -35,7 +43,11 @@ const App = () => {
         <Stepper steps={steps} currentSteps={currentSteps} />
       </div>
       {/* Navigation controls */}
-      <StepperController />
+      <StepperController
+        handleClick={handleClick}
+        steps={steps}
+        currentSteps={currentSteps}
+      />
     </div>
   );
 };

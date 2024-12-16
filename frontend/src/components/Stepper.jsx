@@ -19,7 +19,6 @@ const Stepper = ({ steps, currentSteps }) => {
           completed: true,
         };
         count++;
-        console.log("1", ...newSteps);
       }
       // completed
       else if (count < stepNumber) {
@@ -30,7 +29,6 @@ const Stepper = ({ steps, currentSteps }) => {
           completed: true,
         };
         count++;
-        console.log("2", ...newSteps);
       }
       //step pending
       else {
@@ -41,7 +39,6 @@ const Stepper = ({ steps, currentSteps }) => {
           completed: false,
         };
         count++;
-        console.log("3", ...newSteps);
       }
     }
     return newSteps;
@@ -49,8 +46,6 @@ const Stepper = ({ steps, currentSteps }) => {
 
   useEffect(() => {
     const stepsState = steps.map((step, index) => {
-      console.log("step", step);
-
       return Object.assign(
         {},
         {
@@ -61,15 +56,12 @@ const Stepper = ({ steps, currentSteps }) => {
         }
       );
     });
-    console.log("stepsState", stepsState);
     stepRef.current = stepsState;
     const current = updateStep(currentSteps - 1, stepRef.current);
     setNewStep(current);
   }, [steps, currentSteps]);
 
   const displaySteps = newStep.map((step, index) => {
-    console.log(step);
-
     return (
       <div
         key={index}
@@ -102,7 +94,10 @@ const Stepper = ({ steps, currentSteps }) => {
             {/* Steps Descriptions */} {step.description}
           </div>
         </div>
-        <div className="flex-auto border-t-2 transition duration-500 ease-in-out">
+        <div
+          className={`flex-auto border-t-2 transition duration-500 ease-in-out
+                ${step.completed ? "border-rose-500" : "border-gray-300"} `}
+        >
           {/* Steps Line */}
         </div>
       </div>

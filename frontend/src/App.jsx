@@ -5,9 +5,13 @@ import Account from "./components/steps/Account";
 import Bank from "./components/steps/Bank";
 import Nominees from "./components/steps/Nominees";
 import Complete from "./components/steps/Complete";
+import StepperContext from "./contexts/StepperContext";
 
 const App = () => {
   const [currentSteps, setCurrentSteps] = useState(1);
+  const [userData, setUserData] = useState("");
+  const [finalData, setFinalData] = useState([]);
+
   const steps = [
     "Account Details",
     "Bank Details",
@@ -41,6 +45,18 @@ const App = () => {
       {/* Stepper */}
       <div className="container horizontal mt-5">
         <Stepper steps={steps} currentSteps={currentSteps} />
+        <div className="my-10 p-10">
+          <StepperContext.Provider
+            value={{
+              userData,
+              setUserData,
+              finalData,
+              setFinalData,
+            }}
+          >
+            {displaySteps(currentSteps)}
+          </StepperContext.Provider>
+        </div>
       </div>
       {/* Navigation controls */}
       <StepperController

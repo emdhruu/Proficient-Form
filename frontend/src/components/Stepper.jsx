@@ -71,7 +71,7 @@ const Stepper = ({ steps, currentSteps }) => {
             : "flex items-center"
         }
       >
-        <div className="relative flex flex-col items-center text-teal-600">
+        <div className="relative flex flex-col items-center text-teal-950">
           <div
             className={` border p-1 px-3 h-12 w-12 border-rose-500  rounded-full flex items-center justify-center  hover:text-white hover:bg-rose-500 transition duration-700 ease-in-out cursor-pointer
               ${
